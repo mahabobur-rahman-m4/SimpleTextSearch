@@ -4,6 +4,7 @@ import com.bradforj287.SimpleTextSearch.SearchResult;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Scanner;
 
@@ -26,9 +27,11 @@ public class StopWordHelper {
         //Get file from resources folder
         ClassLoader classLoader = SearchResult.class.getClassLoader();
 
-        File file = new File(classLoader.getResource("stopwords/en.txt").getFile());
-
-        try (Scanner scanner = new Scanner(file)) {
+        //File file = new File(classLoader.getResource("stopwords/en.txt").getFile());
+        
+		
+        try (InputStream is = StopWordHelper.class.getClassLoader().getResourceAsStream("stopwords/en.txt"); Scanner scanner = new Scanner(is)) {
+        //try (Scanner scanner = new Scanner(file)) {
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -45,7 +48,7 @@ public class StopWordHelper {
 
             scanner.close();
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

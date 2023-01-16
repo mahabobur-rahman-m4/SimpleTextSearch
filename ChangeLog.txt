@@ -1,0 +1,4 @@
+[16-Jan-2022]
+* [MMR] Make it as stable version
+* [MMR] Fixes to read the file from class loader
+* [MMR] Added from original source to metafour-int

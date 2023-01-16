@@ -81,14 +81,20 @@ public class SimpleTextSearchTest {
         documents.add(new Document(doc2, new Integer(2)));
         documents.add(new Document(doc3, new Integer(3)));
         documents.add(new Document(doc4, new Integer(4)));
+        long usedMemoryBefore = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
         TextSearchIndex index = SearchIndexFactory.buildIndex(documents);
-
+        long usedMemoryAfter = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+        
+        System.out.println((usedMemoryAfter -  usedMemoryBefore)/(1024 * 1024));
+        
+        
         String searchTerm = "Mad in pursuit and in possession so";
 
         SearchResultBatch batch = index.search(searchTerm, Integer.MAX_VALUE);
         List<SearchResult> results = batch.getSearchResults();
 
+        
         // verify correct top result
         assert(results.get(0).getUniqueIdentifier().equals(4));
 

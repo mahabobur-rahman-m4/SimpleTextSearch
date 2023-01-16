@@ -1,15 +1,15 @@
 package com.bradforj287.SimpleTextSearch;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
 import com.bradforj287.SimpleTextSearch.engine.Corpus;
 import com.bradforj287.SimpleTextSearch.engine.DocumentParser;
 import com.bradforj287.SimpleTextSearch.engine.InvertedIndex;
 import com.bradforj287.SimpleTextSearch.engine.ParsedDocument;
 import com.google.common.collect.Lists;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by brad on 6/6/15.
@@ -26,13 +26,13 @@ public class SearchIndexFactory {
         for (Document doc : docs) {
             retVal.add(parser.parseDocument(doc));
         }
-
+ 
         return retVal;
     }
 
     private static Collection<ParsedDocument> buildParsedDocumentsParrallel(Collection<Document> theDocs) {
-        int cores = Math.max(1, Runtime.getRuntime().availableProcessors());
-
+        //int cores = Math.max(1, Runtime.getRuntime().availableProcessors());
+    	int cores = 1;
         final Collection<ParsedDocument> parsedDocuments = new ConcurrentLinkedQueue<>();
 
         List<Document> docsList = new ArrayList<>(theDocs);
